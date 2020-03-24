@@ -14,12 +14,19 @@ public class Controller extends Application {
     public static final int TILE_SIZE=80;
     public static final int WIDTH=8;
     public static final int HEIGHT=8;
-    int x=4;
-    int y=4;
+
+
     private Group tileGroup=new Group();
     private Group atGroup=new Group();
-    private int[][] atynKoordinatlary=new int[HEIGHT][WIDTH];
+    public int[] atynKoordinatlaryX=new int[HEIGHT*WIDTH];
+    public int[] atynKoordinatlaryY=new int[HEIGHT*WIDTH];
+    public int[] atynKoneKoordinatyX=new int[HEIGHT*WIDTH];
+    public int[] atynKoneKoordinatyY=new int[HEIGHT*WIDTH];
+
+
     Button button=new Button("Ileri Hamle");
+    Button button2= new Button("Aty Yerleshtir");
+
 
 
 
@@ -28,9 +35,8 @@ public class Controller extends Application {
     private Parent creatContent(){
         Pane root= new Pane();
         root.setPrefSize(WIDTH*TILE_SIZE+200,HEIGHT*TILE_SIZE);
-        At at = atyGoy(4, 4);
 
-        root.getChildren().addAll(tileGroup,at,atGroup);
+        root.getChildren().addAll(tileGroup,atGroup);
         for (int y=0;  y<HEIGHT;y++){
             for (int x=0; x<WIDTH;x++){
                 Tile tile=new Tile((x+y)%2==0,x,y);
@@ -47,32 +53,56 @@ public class Controller extends Application {
     public void start(Stage primaryStage) throws Exception{
         BorderPane ui=new BorderPane();
         ui.setPrefSize(WIDTH*TILE_SIZE+200,HEIGHT*TILE_SIZE);
-        ui.setRight(button);
+        HBox buttons=new HBox();
+        buttons.getChildren().addAll(button2,button);
+        ui.setRight(buttons);
 
 
-        BorderPane.setAlignment(button, Pos.CENTER_LEFT);
+        button2.setOnAction(e->{
+            At at = atyGoy(0, 7);
+            atynKoordinatlaryX[0]=at.getAtX();
+            atynKoordinatlaryY[0]=at.getAtY();
+            atGroup.getChildren().add(at);
+            System.out.print(atynKoordinatlaryX[0]);
+            System.out.print(",");
+            System.out.println(atynKoordinatlaryY[0]);
+        });
+
+
+         int[] atXHereketi={1,1,2,2,-1,-1,-2,-2};
+         int[] atYHereketi={2,-2,1,-1,2,-2,1,-1};
 
         button.setOnAction(e->{
-            //tile.setAt(at);
-               At at = atyGoy(x, y);
-               At at2 = atyGoy(x+2, y-1);
-               At at3 = atyGoy(x+2, y+1);
-               At at4 = atyGoy(x+1, y+2);
-               At at5 = atyGoy(x+1, y-2);
-               At at6 = atyGoy(x-2, y-1);
-               At at7 = atyGoy(x-2, y+1);
-               At at8 = atyGoy(x-1, y-2);
-               At at9 = atyGoy(x-1, y+2);
+            int m=0;
+            for (int j=0; j<3; j++) {
+                for (int i=0; i<8; i++){
+                    int a=atynKoordinatlaryX[j];
+                    int b=atynKoordinatlaryY[j];
+                    if (a!=0 || b!=0) {
+                        int x = atynKoordinatlaryX[j] + atXHereketi[i];
+                        int y = atynKoordinatlaryY[j] + atYHereketi[i];
+                        if (x < 8 && x >= 0 && y < 8 && y >= 0) {
+                            At at = atyGoy(x, y);
+                            atGroup.getChildren().add(at);
+                            System.out.println(x+" "+y);
+                            atynKoneKoordinatyX[m]=x;
+                            atynKoneKoordinatyY[m]=y;
+                            m++;
 
+                        }
+                    }
 
+                   }
+            }
 
-               atGroup.getChildren().addAll(at,at2,at3,at4,at5,at6,at7,at8,at9);
+            for (int j=0; j<3; j++) {
+                atynKoordinatlaryX[j]=atynKoneKoordinatyX[j];
+                atynKoordinatlaryY[j]=atynKoneKoordinatyY[j];
 
-               x=x+1;
-               y=y-2;
-
-
-
+            }
+            for (int j=0; j<3; j++){
+                System.out.println(atynKoneKoordinatyX[j]+" "+atynKoneKoordinatyY[j]);
+            }
 
         });
 

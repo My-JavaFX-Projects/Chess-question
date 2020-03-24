@@ -7,7 +7,8 @@ import static sample.Controller.TILE_SIZE;
 
 public class At extends StackPane {
 
-
+    public int atX, atY;
+    public int atOldX, atOldY;
        public At(int x, int  y) {
            Image at = new Image("https://i.pinimg.com/originals/9a/54/09/9a5409d567eaf1a3020d8116a36f0984.jpg");
            ImageView imageView = new ImageView(at);
@@ -16,5 +17,15 @@ public class At extends StackPane {
            relocate(x*TILE_SIZE,y*TILE_SIZE);
            getChildren().addAll(imageView);
 
+           this.atX=x;
+           this.atY=y;
+
+           }
+           public int getAtX(){
+           return atX;
+           }
+
+           public int getAtY(){
+           return atY;
            }
 }
