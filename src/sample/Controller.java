@@ -22,6 +22,8 @@ public class Controller extends Application {
     public int[] atynKoordinatlaryY=new int[HEIGHT*WIDTH];
     public int[] atynKoneKoordinatyX=new int[HEIGHT*WIDTH];
     public int[] atynKoneKoordinatyY=new int[HEIGHT*WIDTH];
+    private At[][] board=new At[HEIGHT][WIDTH];
+
 
 
     Button button=new Button("Ileri Hamle");
@@ -40,6 +42,7 @@ public class Controller extends Application {
         for (int y=0;  y<HEIGHT;y++){
             for (int x=0; x<WIDTH;x++){
                 Tile tile=new Tile((x+y)%2==0,x,y);
+
                 tileGroup.getChildren().add(tile);
 
             }
@@ -56,7 +59,10 @@ public class Controller extends Application {
         HBox buttons=new HBox();
         buttons.getChildren().addAll(button2,button);
         ui.setRight(buttons);
-
+        for (int i=0; i<atynKoneKoordinatyX.length; i++){
+            atynKoordinatlaryX[i]=-1;
+            atynKoordinatlaryY[i]=-1;
+        }
 
         button2.setOnAction(e->{
             At at = atyGoy(0, 7);
@@ -73,12 +79,16 @@ public class Controller extends Application {
          int[] atYHereketi={2,-2,1,-1,2,-2,1,-1};
 
         button.setOnAction(e->{
+
+            Tile tile1=new Tile((0+7)%2==0,0,7);
+            tileGroup.getChildren().add(tile1);
+
             int m=0;
             for (int j=0; j<3; j++) {
                 for (int i=0; i<8; i++){
                     int a=atynKoordinatlaryX[j];
                     int b=atynKoordinatlaryY[j];
-                    if (a!=0 || b!=0) {
+                    if (a!=-1 || b!=-1) {
                         int x = atynKoordinatlaryX[j] + atXHereketi[i];
                         int y = atynKoordinatlaryY[j] + atYHereketi[i];
                         if (x < 8 && x >= 0 && y < 8 && y >= 0) {
@@ -88,6 +98,7 @@ public class Controller extends Application {
                             atynKoneKoordinatyX[m]=x;
                             atynKoneKoordinatyY[m]=y;
                             m++;
+                            at.Atsany();
 
                         }
                     }
@@ -95,14 +106,15 @@ public class Controller extends Application {
                    }
             }
 
-            for (int j=0; j<3; j++) {
+            for (int j=0; j<m; j++) {
                 atynKoordinatlaryX[j]=atynKoneKoordinatyX[j];
                 atynKoordinatlaryY[j]=atynKoneKoordinatyY[j];
 
             }
-            for (int j=0; j<3; j++){
+            for (int j=0; j<m; j++){
                 System.out.println(atynKoneKoordinatyX[j]+" "+atynKoneKoordinatyY[j]);
             }
+
 
         });
 
