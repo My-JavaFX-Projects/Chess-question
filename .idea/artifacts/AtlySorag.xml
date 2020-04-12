@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="AtlySorag">
+    <output-path>$PROJECT_DIR$/out/artifacts/AtlySorag</output-path>
+    <root id="root">
+      <element id="archive" name="AtlySorag.jar">
+        <element id="module-output" name="AtlySorag" />
+      </element>
+    </root>
+  </artifact>
+</component>

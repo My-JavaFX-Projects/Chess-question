@@ -1,13 +1,14 @@
 package sample;
-
+//Solved Betiiiiiyehuuuu
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import java.util.*;
 
 
 public class Controller extends Application {
@@ -18,21 +19,14 @@ public class Controller extends Application {
 
     private Group tileGroup=new Group();
     private Group atGroup=new Group();
-    public int[] atynKoordinatlaryX=new int[HEIGHT*WIDTH];
-    public int[] atynKoordinatlaryY=new int[HEIGHT*WIDTH];
-    public int[] atynKoneKoordinatyX=new int[HEIGHT*WIDTH];
-    public int[] atynKoneKoordinatyY=new int[HEIGHT*WIDTH];
-    private At[][] board=new At[HEIGHT][WIDTH];
+    ArrayList<int[]> atynKordinatlary=new ArrayList<>();
+    ArrayList<int[]> atynKoneKord=new ArrayList<>();
+    Tile[][] board=new Tile[WIDTH][HEIGHT];
 
 
 
     Button button=new Button("Ileri Hamle");
     Button button2= new Button("Aty Yerleshtir");
-
-
-
-
-
 
     private Parent creatContent(){
         Pane root= new Pane();
@@ -42,13 +36,11 @@ public class Controller extends Application {
         for (int y=0;  y<HEIGHT;y++){
             for (int x=0; x<WIDTH;x++){
                 Tile tile=new Tile((x+y)%2==0,x,y);
-
+                board[y][x]=tile;
                 tileGroup.getChildren().add(tile);
 
             }
         }
-
-
         return root;
     }
 
@@ -59,66 +51,59 @@ public class Controller extends Application {
         HBox buttons=new HBox();
         buttons.getChildren().addAll(button2,button);
         ui.setRight(buttons);
-        for (int i=0; i<atynKoneKoordinatyX.length; i++){
-            atynKoordinatlaryX[i]=-1;
-            atynKoordinatlaryY[i]=-1;
-        }
+
 
         button2.setOnAction(e->{
             At at = atyGoy(0, 7);
-            atynKoordinatlaryX[0]=at.getAtX();
-            atynKoordinatlaryY[0]=at.getAtY();
+            int[] atK={at.getAtX(),at.getAtY()};
+            System.out.println(Arrays.toString(atK));
+            atynKordinatlary.add(atK);
             atGroup.getChildren().add(at);
-            System.out.print(atynKoordinatlaryX[0]);
-            System.out.print(",");
-            System.out.println(atynKoordinatlaryY[0]);
-        });
-
+        }
+        );
 
          int[] atXHereketi={1,1,2,2,-1,-1,-2,-2};
          int[] atYHereketi={2,-2,1,-1,2,-2,1,-1};
 
         button.setOnAction(e->{
+            atGroup.getChildren().clear();
 
-            Tile tile1=new Tile((0+7)%2==0,0,7);
-            tileGroup.getChildren().add(tile1);
+            for (int[] arrays:atynKordinatlary){
+                allow:
+                for (int i=0; i<atXHereketi.length; ++i){
+                    int x= arrays[0]+atXHereketi[i];
+                   int y=arrays[1]+atYHereketi[i];
+                    int[] koneKordiant={x,y};
 
-            int m=0;
-            for (int j=0; j<3; j++) {
-                for (int i=0; i<8; i++){
-                    int a=atynKoordinatlaryX[j];
-                    int b=atynKoordinatlaryY[j];
-                    if (a!=-1 || b!=-1) {
-                        int x = atynKoordinatlaryX[j] + atXHereketi[i];
-                        int y = atynKoordinatlaryY[j] + atYHereketi[i];
-                        if (x < 8 && x >= 0 && y < 8 && y >= 0) {
-                            At at = atyGoy(x, y);
-                            atGroup.getChildren().add(at);
-                            System.out.println(x+" "+y);
-                            atynKoneKoordinatyX[m]=x;
-                            atynKoneKoordinatyY[m]=y;
-                            m++;
-                            at.Atsany();
+                     if (x<WIDTH&&x>=0&&y<HEIGHT&&y>=0) {
+                         if (board[x][y].hasAt()) {
+                             continue allow;
+                         } else {
 
+                             At at = atyGoy(x, y);
+                             Tile tile = new Tile((x + y) % 2 == 0, x, y);
+                             tile.setAt(at);
+                             board[x][y] = tile;
+
+                             atGroup.getChildren().add(at);
+                             atynKoneKord.add(koneKordiant);
+                         }
+                     }
+                   }
+                }
+                    for (int i=0; i<WIDTH;++i){
+                        for (int j=0; j<HEIGHT; ++j){
+                            board[i][j].setAt(null);
                         }
                     }
+            System.out.println(atynKoneKord.size());
+            atynKordinatlary.clear();
+                atynKordinatlary.addAll(atynKoneKord);
+                atynKoneKord.clear();
 
-                   }
-            }
-
-            for (int j=0; j<m; j++) {
-                atynKoordinatlaryX[j]=atynKoneKoordinatyX[j];
-                atynKoordinatlaryY[j]=atynKoneKoordinatyY[j];
-
-            }
-            for (int j=0; j<m; j++){
-                System.out.println(atynKoneKoordinatyX[j]+" "+atynKoneKoordinatyY[j]);
-            }
 
 
         });
-
-
 
         ui.getChildren().addAll(creatContent());
         Scene scene = new Scene(ui);
@@ -126,6 +111,7 @@ public class Controller extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
     private At atyGoy( int x,int y){
     At at=new At(x,y);
 
