@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="besh">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/AtlySorag.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/AtlySorag.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="CozdumAhyrsony">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AtlySorag.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AtlySorag.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AtlySorag/sample/At.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AtlySorag/sample/At.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/AtlySorag/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AtlySorag/sample/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/at.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/At.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/At.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -250,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586535055625</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="CozdumAhyrsony">
+      <created>1586733590735</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1586733590735</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -275,6 +276,7 @@
     <MESSAGE value="ucunji" />
     <MESSAGE value="dort" />
     <MESSAGE value="besh" />
-    <option name="LAST_COMMIT_MESSAGE" value="besh" />
+    <MESSAGE value="CozdumAhyrsony" />
+    <option name="LAST_COMMIT_MESSAGE" value="CozdumAhyrsony" />
   </component>
 </project>

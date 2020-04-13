@@ -1,5 +1,6 @@
 package sample;
 //Solved Betiiiiiyehuuuu
+// bir nokatdan bashlan atyh hereketi. 100nji  adimde bolup biljek yerleri(10 adimde belli bolyar)
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -23,27 +24,22 @@ public class Controller extends Application {
     ArrayList<int[]> atynKoneKord=new ArrayList<>();
     Tile[][] board=new Tile[WIDTH][HEIGHT];
 
-
-
     Button button=new Button("Ileri Hamle");
     Button button2= new Button("Aty Yerleshtir");
 
     private Parent creatContent(){
         Pane root= new Pane();
         root.setPrefSize(WIDTH*TILE_SIZE+200,HEIGHT*TILE_SIZE);
-
         root.getChildren().addAll(tileGroup,atGroup);
         for (int y=0;  y<HEIGHT;y++){
             for (int x=0; x<WIDTH;x++){
                 Tile tile=new Tile((x+y)%2==0,x,y);
                 board[y][x]=tile;
                 tileGroup.getChildren().add(tile);
-
             }
         }
         return root;
     }
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         BorderPane ui=new BorderPane();
@@ -51,7 +47,6 @@ public class Controller extends Application {
         HBox buttons=new HBox();
         buttons.getChildren().addAll(button2,button);
         ui.setRight(buttons);
-
 
         button2.setOnAction(e->{
             At at = atyGoy(0, 7);
@@ -67,7 +62,6 @@ public class Controller extends Application {
 
         button.setOnAction(e->{
             atGroup.getChildren().clear();
-
             for (int[] arrays:atynKordinatlary){
                 allow:
                 for (int i=0; i<atXHereketi.length; ++i){
@@ -79,12 +73,10 @@ public class Controller extends Application {
                          if (board[x][y].hasAt()) {
                              continue allow;
                          } else {
-
                              At at = atyGoy(x, y);
                              Tile tile = new Tile((x + y) % 2 == 0, x, y);
                              tile.setAt(at);
                              board[x][y] = tile;
-
                              atGroup.getChildren().add(at);
                              atynKoneKord.add(koneKordiant);
                          }
@@ -100,9 +92,6 @@ public class Controller extends Application {
             atynKordinatlary.clear();
                 atynKordinatlary.addAll(atynKoneKord);
                 atynKoneKord.clear();
-
-
-
         });
 
         ui.getChildren().addAll(creatContent());
