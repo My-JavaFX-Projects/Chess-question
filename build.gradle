@@ -9,7 +9,29 @@ plugins {
   id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 javafx {
     version = "14"
     modules = [ 'javafx.controls' ]
+}
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'sample.Main'
+        )
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
 }
