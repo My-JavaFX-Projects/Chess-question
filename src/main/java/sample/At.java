@@ -12,7 +12,7 @@ public class At extends StackPane {
     public   int atX, atY;
     public int atOldX, atOldY;
        public At(int atX, int  atY) {
-           Image at = new Image("knightb.gif",TILE_SIZE,TILE_SIZE,false,false);
+           Image at = new Image("images/knightb.gif",TILE_SIZE,TILE_SIZE,false,false);
            ImageView imageView = new ImageView(at);
 
 
