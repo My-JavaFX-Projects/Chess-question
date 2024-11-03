@@ -13,3 +13,4 @@ Run created jar with
 ```sh
 java -jar build/libs/Shahmat.jar
 ```
+https://github.com/user-attachments/assets/2953f646-d051-4ec3-8cb8-7eea0feeeacc
